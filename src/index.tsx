@@ -1,15 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import HomePage from './components/homePage/homepage';
-import './index.module.scss';
-import reportWebVitals from './reportWebVitals';
+import "bootstrap/dist/css/bootstrap.min.css";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { initDB } from "react-indexed-db";
+import App from "./App";
+import "./index.module.scss";
+import { indexDBConfig } from "./indexDBConfig";
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
+
+initDB(indexDBConfig);
+
 root.render(
   <React.StrictMode>
-    <HomePage />
+    <App />
   </React.StrictMode>
 );
 
