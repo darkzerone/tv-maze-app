@@ -6,8 +6,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { ShowDetail } from "../../api/tvMaze/types";
-import DetailPageContext from "./context/DetailPageContext";
-import DetailPage from "./DetailPage";
+import DetailPageContext from "./context/dpc";
+import DetailPage from "./dp";
 
 const providerMock = {
   getShowById: jest.fn(),
