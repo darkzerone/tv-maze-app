@@ -14,7 +14,7 @@ export type ShowRating = {
   average: string;
 };
 
-export type ShowNetworkCountry = {
+export type Country = {
   name: string;
   code: string;
   timezone: string;
@@ -23,11 +23,11 @@ export type ShowNetworkCountry = {
 export type ShowNetwork = {
   id: number;
   name: string;
-  country: ShowNetworkCountry;
+  country: Country;
   officialSite: string;
 };
 
-export type ShowImage = {
+export type Image = {
   medium?: string;
   original?: string;
 };
@@ -61,8 +61,40 @@ export type Show = {
   webChannel: string | null;
   dvdCountry: string | null;
   externals: Record<string, number | string>;
-  image: ShowImage;
+  image: Image;
   summary: string;
   updated: number;
   _links: ShowLink;
+};
+
+export type ShowCastPerson = {
+  id: number;
+  url: string;
+  name: string;
+  country: Country;
+  birthday: string;
+  deathday: string | null;
+  gender: string;
+  image: Image;
+  updated: number;
+};
+
+export type ShowCastCharacter = {
+  id: number;
+  url: string;
+  name: string;
+  image: Image;
+};
+
+export type ShowCastMember = {
+  person: ShowCastPerson;
+  character: ShowCastCharacter;
+  self?: boolean;
+  voice?: boolean;
+};
+
+export type ShowDetail = Show & {
+  _embedded: {
+    cast: ShowCastMember[];
+  };
 };

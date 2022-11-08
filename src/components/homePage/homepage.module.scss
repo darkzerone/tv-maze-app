@@ -2,51 +2,16 @@
   align-items: center;
   color: white;
   margin-top: 10px;
-  max-width: 100vw;
-  height: 85vh;
+  height: 73vh;
+  max-width: 100%;
   overflow-y: scroll;
   justify-content: space-evenly;
 }
 
 .content {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.pagination_container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.searchbar {
-  &_container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
-
-  &_wrapper {
-    width: 50vw;
-    max-width: 600px;
-    min-width: 300px;
-  }
-}
-
-.show_item {
-  margin-bottom: 20px;
-  min-height: 295px;
-
-  &_info {
-    text-align: start;
-    justify-content: space-between;
-
-    width: 210px;
-
-    span {
-      width: 100%;
-    }
-  }
-}

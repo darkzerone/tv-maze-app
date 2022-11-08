@@ -1,5 +1,5 @@
 import axios, { CancelTokenSource } from "axios";
-import { Show, ShowSearchResponse } from "./types";
+import { Show, ShowDetail, ShowSearchResponse } from "./types";
 
 let getShowsCancelTokenSoruce: CancelTokenSource;
 
@@ -46,4 +46,24 @@ export const searchShows = async (val: string) => {
         // handle errors
       }
     })) as ShowSearchResponse;
+};
+
+let getShowByIdCancelTokenSoruce: CancelTokenSource;
+
+export const getShowDetailsById = async (id: string) => {
+  if (getShowByIdCancelTokenSoruce) {
+    getShowByIdCancelTokenSoruce.cancel("Operation canceled by the user.");
+  }
+
+  getShowByIdCancelTokenSoruce = axios.CancelToken.source();
+
+  const options = {
+    cancelToken: getShowByIdCancelTokenSoruce.token,
+  };
+
+  return (await axios
+    .get<ShowDetail>(`https://api.tvmaze.com/shows/${id}?embed=cast`, options)
+    .then((res) => {
+      return res.data;
+    })) as ShowDetail;
 };

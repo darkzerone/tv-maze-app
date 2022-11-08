@@ -10,7 +10,7 @@ import { Show } from "../../../api/tvMaze/types";
 import { db } from "../../../indexDBConfig";
 
 interface HomePageContextInterface {
-  searchCountry: (val: string) => void;
+  searchShow: (val: string) => void;
   loading: boolean;
   shows: Show[];
   activePage: number;
@@ -20,7 +20,7 @@ interface HomePageContextInterface {
 
 const HomePageContext = createContext<HomePageContextInterface>({
   loading: false,
-  searchCountry: () => console.error("Please implement this function."),
+  searchShow: () => console.error("Please implement this function."),
   shows: [],
   activePage: 1,
   searchActive: false,
@@ -43,11 +43,16 @@ const HomePageContextProvider = ({
     setLoading(true);
 
     let response: Show[] = [];
+    let storedShows: { page: number; shows: Show[] } | undefined = undefined;
 
-    const storedShows = await db.shows
-      .where("page")
-      .equals(page || 1)
-      .first();
+    try {
+      storedShows = await db.shows
+        .where("page")
+        .equals(page || 1)
+        .first();
+    } catch (error) {
+      console.error(error);
+    }
 
     if (storedShows) {
       setShows(storedShows.shows);
@@ -63,13 +68,13 @@ const HomePageContextProvider = ({
       if (response.length > 0) {
         await db.shows.add({ page: page || 1, shows: response });
       }
-      
+
       setShows(response);
       setLoading(false);
     }
   }, []);
 
-  const searchCountry = useCallback(
+  const searchShow = useCallback(
     async (val: string) => {
       if (val.length === 0) {
         setSearchActive(false);
@@ -108,7 +113,7 @@ const HomePageContextProvider = ({
   };
 
   const context = {
-    searchCountry,
+    searchShow,
     shows,
     loading,
     handlePageChange,

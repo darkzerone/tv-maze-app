@@ -1,0 +1,14 @@
+.searchbar {
+  &_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  &_wrapper {
+    width: 50vw;
+    max-width: 600px;
+    min-width: 300px;
+  }
+}
