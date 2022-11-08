@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import debounce from "lodash.debounce";
+import React, { useCallback, useContext, useEffect, useMemo } from "react";
 import { FormControl } from "react-bootstrap";
 import OnlineStatusContext from "../../../../utilities/onlineStatusProvider/onlineStatusProvider";
 import HomePageContext from "../../context/homePageContext";
@@ -8,13 +9,28 @@ function SearchBar() {
   const online = useContext(OnlineStatusContext);
   const { searchShow } = useContext(HomePageContext);
 
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      searchShow(e.target.value);
+    },
+    [searchShow]
+  );
+
+  const debouncedResults = useMemo(() => {
+    return debounce(handleChange, 400);
+  }, [handleChange]);
+
+  useEffect(() => {
+    return () => {
+      debouncedResults.cancel();
+    };
+  });
+
   return (
     <div className={classes.searchbar_container}>
       <div className={classes.searchbar_wrapper}>
         <FormControl
-          onChange={(event) => {
-            searchShow(event.target.value);
-          }}
+          onChange={debouncedResults}
           disabled={!online}
           placeholder={
             !online

@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { Show } from "../../api/tvMaze/types";
 import HomePageContext from "./context/homePageContext";
@@ -27,8 +27,14 @@ const providerMock = {
 
 beforeEach(() => {
   cleanup();
+  jest.useFakeTimers();
   providerMock.searchShow.mockClear();
   providerMock.handlePageChange.mockClear();
+});
+
+afterEach(() => {
+  jest.runOnlyPendingTimers();
+  jest.useRealTimers();
 });
 
 test("it renders", () => {
@@ -80,7 +86,7 @@ test("handlepagechange called", () => {
   expect(providerMock.handlePageChange).toHaveBeenCalled();
 });
 
-test("searchShow called", () => {
+test("searchShow called", async () => {
   render(
     <HomePageContext.Provider value={{ ...providerMock }}>
       <HomePage />
@@ -96,5 +102,7 @@ test("searchShow called", () => {
 
   fireEvent.change(searchBarElement, { target: { value: "a" } });
 
-  expect(providerMock.searchShow).toHaveBeenCalled();
+  jest.runOnlyPendingTimers();
+
+  await waitFor(() => expect(providerMock.searchShow).toHaveBeenCalled());
 });
