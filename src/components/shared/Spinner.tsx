@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import OnlineStatusContext from "../../utilities/onlineStatusProvider/onlineStatusProvider";
+import OnlineStatusContext from "../../utilities/OnlineStatusProvider/OnlineStatusProvider";
 
 function Spinner() {
   const online = useContext(OnlineStatusContext);

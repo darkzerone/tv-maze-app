@@ -1,7 +1,7 @@
 import debounce from "lodash.debounce";
 import React, { useCallback, useContext, useEffect, useMemo } from "react";
 import { FormControl } from "react-bootstrap";
-import OnlineStatusContext from "../../../../utilities/onlineStatusProvider/onlineStatusProvider";
+import OnlineStatusContext from "../../../../utilities/OnlineStatusProvider/OnlineStatusProvider";
 import HomePageContext from "../../context/HomePageContext";
 import classes from "./Searchbar.module.scss";
 

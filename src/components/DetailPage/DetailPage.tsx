@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Spinner from "../shared/Spinner";
 import CastMember from "./components/CastMember/CastMember";
 import ShowInfo from "./components/ShowInfo/ShowInfo";
-import DetailPageContext from "./context/dpc";
+import DetailPageContext from "./context/DetailPageContext";
 
 type DetailPageParams = {
   id: string;
