@@ -48,10 +48,8 @@ function HomePage() {
             </div>
           ) : shows.length > 0 ? (
             shows.map((show) => (
-              <div
-                className={`${classes.show_item} col-md-6 col-xl-4 row justify-content-center`}
-              >
-                <div className="col-sm-12 col-lg-6">
+              <div className={`${classes.show_item} col-md-6 col-xl-4 row`}>
+                <div className="col-sm-12 col-lg-6 d-flex justify-content-center">
                   <LazyLoadImage
                     src={show.image?.medium}
                     alt={`${show.name} | poster`}
@@ -62,27 +60,35 @@ function HomePage() {
                 <div
                   className={`${classes.show_item_info} col-sm-12 col-lg-6 d-flex flex-column`}
                 >
-                  <span>
-                    <b>Title:</b> {show.name}
-                  </span>
-                  <span>
-                    <b>Premiered:</b> {show?.premiered || "No"}
-                  </span>
-                  {show.ended && (
+                  <div className="d-flex flex-column">
                     <span>
-                      <b>Ended:</b> {show.ended}
+                      <b>Title:</b> {show.name}
                     </span>
-                  )}
-                  <span>
-                    <b>Language:</b> {show.language}
-                  </span>
-                  <span>
-                    <b>Rating:</b>{" "}
-                    {show.rating.average ? `${show.rating.average}/10` : "-"}
-                  </span>
-                  <span>
-                    <b>Type:</b> {show.type || "unkown"}
-                  </span>
+                    <span>
+                      <b>Premiered:</b> {show?.premiered || "No"}
+                    </span>
+                    {show.ended && (
+                      <span>
+                        <b>Ended:</b> {show.ended}
+                      </span>
+                    )}
+                    <span>
+                      <b>Language:</b> {show.language}
+                    </span>
+                    <span>
+                      <b>Rating:</b>{" "}
+                      {show.rating.average ? `${show.rating.average}/10` : "-"}
+                    </span>
+                    <span>
+                      <b>Type:</b> {show.type || "unkown"}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    className={`btn btn-light ${classes.show_item_button}`}
+                  >
+                    More info
+                  </button>
                 </div>
               </div>
             ))
@@ -93,8 +99,12 @@ function HomePage() {
         {!searchActive && (
           <div className={classes.pagination_container}>
             <Pagination>
-              <Pagination.First onClick={() => handlePageChange(1)} />
+              <Pagination.First
+                disabled={activePage === 1}
+                onClick={() => handlePageChange(1)}
+              />
               <Pagination.Prev
+                disabled={activePage === 1}
                 onClick={() => handlePageChange(activePage - 1)}
               />
               {pagesArray.map((page) => {
@@ -109,8 +119,12 @@ function HomePage() {
               })}
               <Pagination.Next
                 onClick={() => handlePageChange(activePage + 1)}
+                disabled={activePage === maxPages}
               />
-              <Pagination.Last onClick={() => handlePageChange(maxPages)} />
+              <Pagination.Last
+                disabled={activePage === maxPages}
+                onClick={() => handlePageChange(maxPages)}
+              />
             </Pagination>
           </div>
         )}

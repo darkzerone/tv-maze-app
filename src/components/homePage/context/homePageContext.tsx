@@ -7,6 +7,7 @@ import {
 } from "react";
 import { getPaginatedShows, searchShows } from "../../../api/tvMaze/tvMaze";
 import { Show } from "../../../api/tvMaze/types";
+import { db } from "../../../indexDBConfig";
 
 interface HomePageContextInterface {
   searchCountry: (val: string) => void;
@@ -43,16 +44,29 @@ const HomePageContextProvider = ({
 
     let response: Show[] = [];
 
+    const storedShows = await db.shows
+      .where("page")
+      .equals(page || 1)
+      .first();
+
+    if (storedShows) {
+      setShows(storedShows.shows);
+      setLoading(false);
+      return;
+    }
+
     try {
       response = await getPaginatedShows(page);
     } catch (err) {
       console.error(err);
     } finally {
-      console.log(response);
+      if (response.length > 0) {
+        await db.shows.add({ page: page || 1, shows: response });
+      }
+      
+      setShows(response);
       setLoading(false);
     }
-
-    setShows(response);
   }, []);
 
   const searchCountry = useCallback(

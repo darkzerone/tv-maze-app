@@ -1,17 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { initDB } from "react-indexed-db";
 import App from "./App";
 import "./index.module.scss";
-import { indexDBConfig } from "./indexDBConfig";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-
-initDB(indexDBConfig);
 
 root.render(
   <React.StrictMode>

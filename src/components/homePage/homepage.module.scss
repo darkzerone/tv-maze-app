@@ -1,11 +1,11 @@
 .showList {
-  justify-content: center;
   align-items: center;
   color: white;
   margin-top: 10px;
   max-width: 100vw;
   height: 85vh;
   overflow-y: scroll;
+  justify-content: space-evenly;
 }
 
 .content {
@@ -37,11 +37,12 @@
 
 .show_item {
   margin-bottom: 20px;
-  height: 295px;
+  min-height: 295px;
 
   &_info {
     text-align: start;
-    
+    justify-content: space-between;
+
     width: 210px;
 
     span {
