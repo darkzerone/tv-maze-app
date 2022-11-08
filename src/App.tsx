@@ -1,10 +1,9 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { DetailPageContextProvider } from "./components/detailPage/context/detailPageContext";
-import DetailPage from "./components/detailPage/detailPage";
-import { HomePageContextProvider } from "./components/homePage/context/homePageContext";
-import HomePage from "./components/homePage/homePage";
-import Layout from "./components/layout/layout";
+import { DetailPageContextProvider } from "./components/DetailPage/context/DetailPageContext";
+import DetailPage from "./components/DetailPage/DetailPage";
+import { HomePageContextProvider } from "./components/HomePage/context/HomePageContext";
+import HomePage from "./components/HomePage/HomePage";
+import Layout from "./components/Layout/Layout";
 import { OnlineStatusProvider } from "./utilities/onlineStatusProvider/onlineStatusProvider";
 
 function App() {

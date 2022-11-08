@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import Spinner from "../shared/spinner";
-import Pagination from "./components/pagination/pagination";
-import SearchBar from "./components/searchbar/searchbar";
-import ShowItem from "./components/showItem/showItem";
-import HomePageContext from "./context/homePageContext";
-import classes from "./homePage.module.scss";
+import Spinner from "../shared/Spinner";
+import Pagination from "./components/Pagination/Pagination";
+import SearchBar from "./components/Searchbar/Searchbar";
+import ShowItem from "./components/ShowItem/ShowItem";
+import HomePageContext from "./context/HomePageContext";
+import classes from "./HomePage.module.scss";
 
 function HomePage() {
   const { shows, loading, searchActive } = useContext(HomePageContext);
