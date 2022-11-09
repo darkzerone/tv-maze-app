@@ -19,9 +19,12 @@ function ShowInfo({ show }: CastMemberProps) {
       <div className="col-12 col-lg-6 d-flex flex-column mt-4 mt-md-0 pd-md-0">
         <h1>{show.name}</h1>
         <div className="mb-2 d-flex flex-column">
-          <span>
-            <b>Network:</b> {show.network.name} | {show.network.country.name}
-          </span>
+          {show.network && (
+            <span>
+              <b>Network:</b> {show.network.name} |{" "}
+              {show.network.country.name}
+            </span>
+          )}
           <span>
             <b>Language:</b> {show.language}
           </span>

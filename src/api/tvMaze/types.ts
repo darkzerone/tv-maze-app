@@ -57,7 +57,7 @@ export type Show = {
   rating: ShowRating;
   type: string;
   weight: number;
-  network: ShowNetwork;
+  network: ShowNetwork | null;
   webChannel: string | null;
   dvdCountry: string | null;
   externals: Record<string, number | string>;
