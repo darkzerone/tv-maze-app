@@ -43,7 +43,6 @@ const DetailPageContextProvider = ({
       console.error(err);
     } finally {
       if (response?.name !== undefined) {
-        console.log(response);
         await db.show.add({ showId: id, show: response });
       }
 

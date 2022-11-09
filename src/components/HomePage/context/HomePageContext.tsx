@@ -96,8 +96,6 @@ const HomePageContextProvider = ({
         setLoading(false);
       }
 
-      console.log(response);
-
       setShows(response);
     },
     [activePage, getShowsByPage]

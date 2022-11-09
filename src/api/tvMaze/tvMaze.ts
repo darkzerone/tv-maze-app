@@ -38,13 +38,6 @@ export const searchShows = async (val: string) => {
     .get(`https://api.tvmaze.com/search/shows?q=${val}`, options)
     .then((response) => {
       return response.data;
-    })
-    .catch(function (thrown) {
-      if (axios.isCancel(thrown)) {
-        console.log("Request canceled", thrown.message);
-      } else {
-        // handle errors
-      }
     })) as ShowSearchResponse;
 };
 
